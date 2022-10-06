@@ -1,0 +1,30 @@
+.grid_container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.1rem;
+  width: 80%;
+  margin: 0 auto;
+  max-width: 968px;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 0;
+}
+.grid_item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100px;
+  min-height: 50px;
+  border: 1px solid red;
+  cursor: pointer;
+  border-radius: 50%;
+}
+@media (min-width: 768px) {
+  .grid_container {
+    grid-template-columns: repeat(6, 1fr);
+    max-width: 768px;
+  }
+  .grid_item {
+    min-height: 100px;
+  }
+}
