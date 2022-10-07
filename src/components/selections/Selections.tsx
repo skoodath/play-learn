@@ -1,40 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
-import { generateGrid } from "../../utils/createBoard";
+import React, { useState } from "react";
 import styles from "../styles/selections.module.scss";
+import Numbers from "./Numbers";
 
 const Selections = () => {
-  const [selectedNumber, setSelectedNumber] = useState(0);
+  const [isPadOpen, setIsPadOpen] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState<Array<number>>([]);
-
-  const selectValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedNumber(+event.target.value);
-  };
 
   return (
     <section className={styles.select_container}>
-      <div className={styles.dropdown_container}>
-        <label className={styles.dropdown_label}>
-          Pick a number
-          <input
-            type="number"
-            min={1}
-            max={20}
-            value={selectedNumber}
-            onChange={(e) => selectValue(e)}
-          />
-        </label>
-        <span>Choose multiples of {selectedNumber}</span>
-      </div>
-      <button
-        className={styles.check_answer}
-        onClick={() => {
-          let answers = generateGrid(12).map((times) => selectedNumber * times);
-          setCorrectAnswers(answers);
-          console.log(correctAnswers);
-        }}
+      <span
+        className={styles.select_button}
+        onClick={() => setIsPadOpen(!isPadOpen)}
       >
-        check answer
-      </button>
+        Choose a number
+      </span>
+      <Numbers isPadOpen={isPadOpen} setIsPadOpen={setIsPadOpen} />
     </section>
   );
 };

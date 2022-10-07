@@ -7,9 +7,9 @@ const Interactions = () => {
     console.log(event.target.innerText);
   };
   return (
-    <section className={styles.grid_container}>
+    <section className={styles.grid_container} onClick={handler}>
       {generateGrid(150).map((cell) => (
-        <span key={cell} className={styles.grid_item} onClick={handler}>
+        <span key={cell} className={styles.grid_item}>
           {cell}
         </span>
       ))}
