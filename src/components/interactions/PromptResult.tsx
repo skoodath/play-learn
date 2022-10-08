@@ -14,7 +14,6 @@ const PromptResult = ({ setShowPrompt }: PromptProps) => {
 
   const checkResult = () => {
     let result = compareResults(correctAnswer, selectedAnswers);
-    setShowPrompt(false);
     console.log(result);
   };
 

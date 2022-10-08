@@ -7,17 +7,25 @@ import PromptResult from "./PromptResult";
 
 const Interactions = () => {
   const { state, dispatch } = useContext(AppContext);
-  const { selectedAnswers } = state;
+  const { selectedAnswers, correctAnswer } = state;
   const [showPrompt, setShowPrompt] = useState(false);
 
   const handler = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as HTMLDivElement;
     let val: number | string | undefined = target.dataset.value;
 
-    if (val && state.selectedAnswers.size < 12 && isNaN(+val) === false) {
+    if (val && selectedAnswers.size < 12 && isNaN(+val) === false) {
       dispatch(addToAnswer(+val));
     } else {
       setShowPrompt(true);
+    }
+  };
+
+  const styleAnswers = (val: number) => {
+    if (correctAnswer.includes(val)) {
+      return `${styles.grid_item} ${styles.right}`;
+    } else {
+      return `${styles.grid_item}`;
     }
   };
 
@@ -27,13 +35,7 @@ const Interactions = () => {
         {state.selectedNumber > 0 &&
           generateGrid(150).map((cell, i) => {
             return (
-              <div
-                key={cell}
-                className={`${styles.grid_item} ${
-                  selectedAnswers.has(cell) ? styles.selected : ""
-                }`}
-                data-value={cell}
-              >
+              <div key={cell} className={styleAnswers(cell)} data-value={cell}>
                 {cell}
               </div>
             );
