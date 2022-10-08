@@ -1,8 +1,9 @@
 import { ActionType, AppState } from "../declarations/declarations";
+import { generateGrid } from "../utils/generateArray";
 
 export const initialState: AppState = {
   selectedNumber: 0,
-  correctAnswer: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  correctAnswer: [],
   selectedAnswers: new Set(),
 };
 
@@ -12,11 +13,7 @@ export const reducer = (state: AppState = initialState, action: ActionType) => {
       return {
         ...state,
         selectedNumber: action.payload,
-      };
-    case "CREATE_ANSWERS":
-      return {
-        ...state,
-        correctAnswer: [...state.correctAnswer, action.payload],
+        correctAnswer: generateGrid(12).map((time) => time * action.payload),
       };
     case "ADD_TO_ANSWER":
       return {

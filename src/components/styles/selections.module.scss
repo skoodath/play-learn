@@ -12,7 +12,6 @@
   margin: 0.5rem;
   padding: 0.5rem;
   display: block;
-  width: 100%;
   text-align: center;
   border-radius: 10px;
   font-weight: 700;
@@ -60,7 +59,6 @@
 }
 .select_button {
   background-color: #7fffd9;
-  width: 200px;
   color: #0d4735;
   box-shadow: 0 3px 15px rgb(13, 71, 53, 0.5);
 }
@@ -68,4 +66,7 @@
   background-color: #d26246;
   color: #f2f3f1;
   box-shadow: 0 3px 15px rgba(210, 98, 70, 0.491);
+  width: 100%;
+}
+.selected {
 }

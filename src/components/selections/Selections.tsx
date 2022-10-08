@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AppContext } from "../../state/context";
 import styles from "../styles/selections.module.scss";
 import Numbers from "./Numbers";
 
 const Selections = () => {
   const [isPadOpen, setIsPadOpen] = useState(false);
-  const [correctAnswers, setCorrectAnswers] = useState<Array<number>>([]);
+
+  const { state } = useContext(AppContext);
 
   return (
     <section className={styles.select_container}>
@@ -12,7 +14,7 @@ const Selections = () => {
         className={styles.select_button}
         onClick={() => setIsPadOpen(!isPadOpen)}
       >
-        Choose a number
+        Choose a number {state.selectedNumber === 0 ? "" : state.selectedNumber}
       </span>
       <Numbers isPadOpen={isPadOpen} setIsPadOpen={setIsPadOpen} />
     </section>
