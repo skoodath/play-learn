@@ -5,8 +5,9 @@ import styles from "../styles/header.module.scss";
 
 interface NumberProps {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setWelcome: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const Numbers = ({ setModal }: NumberProps) => {
+const Numbers = ({ setModal, setWelcome }: NumberProps) => {
   const { state, dispatch } = useContext(AppContext);
 
   const numRef = useRef<HTMLInputElement>(null);
@@ -49,7 +50,13 @@ const Numbers = ({ setModal }: NumberProps) => {
             <br />
             for it
           </button>
-          <button className={styles.num_button}>
+          <button
+            className={styles.num_button}
+            onClick={() => {
+              setModal(false);
+              setWelcome(true);
+            }}
+          >
             Maybe <br />
             Later
           </button>

@@ -1,5 +1,3 @@
-type correctAnswer = number;
-
 export type typeName = "SET_USER" | "SELECT_NUMBER" | "ADD_TO_ANSWER";
 
 export type multiple = {
@@ -7,14 +5,23 @@ export type multiple = {
   tableUpto: number;
 };
 
-export type ActionType = {
-  type: typeName;
-  payload: number | string | multiple;
-};
+export type ActionType =
+  | {
+      type: "ADD_TO_ANSWER";
+      payload: number;
+    }
+  | {
+      type: "SET_USER";
+      payload: string;
+    }
+  | {
+      type: "SELECT_NUMBER";
+      payload: multiple;
+    };
 
 export interface AppState {
   currentUser: string;
   table: multiple;
-  correctAnswer: correctAnswer[];
+  correctAnswer: number[];
   selectedAnswers: Set<number>;
 }

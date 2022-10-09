@@ -14,21 +14,21 @@ export const initialState: AppState = {
   selectedAnswers: new Set(),
 };
 
-export const reducer = (state: AppState = initialState, action: ActionType) => {
-  console.log(action.payload);
+export const reducer = (state = initialState, action: ActionType) => {
+  console.log(state);
   switch (action.type) {
-    case setUser:
+    case "SET_USER":
       return {
         ...state,
         currentUser: action.payload,
       };
-    case numberSelect:
+    case "SELECT_NUMBER":
       return {
         ...state,
         table: action.payload,
         correctAnswer: generateGrid(12).map((time) => time * +action.payload),
       };
-    case addAnswer:
+    case "ADD_TO_ANSWER":
       return {
         ...state,
         selectedAnswers: state.selectedAnswers.add(+action.payload),

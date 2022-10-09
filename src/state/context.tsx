@@ -13,6 +13,7 @@ const AppContext = createContext<{
 
 const AppContextProvider = ({ children }: ContextProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       {children}
