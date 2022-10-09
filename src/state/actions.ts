@@ -5,7 +5,7 @@ const typeNames: typeName[] = ["SET_USER", "SELECT_NUMBER", "ADD_TO_ANSWER"];
 const [setUser, numberSelect, addAnswer] = typeNames;
 
 const setCurrentUser = (currentUser: string): ActionType => ({
-  type: setUser,
+  type: "SET_USER",
   payload: currentUser,
 });
 
@@ -13,14 +13,14 @@ const selectNumber = (
   selectedNumber: number,
   tableUpto: number
 ): ActionType => ({
-  type: numberSelect,
+  type: "SELECT_NUMBER",
   payload: {
     selectedNumber,
     tableUpto,
   },
 });
 const updateAnswer = (answerValue: number): ActionType => ({
-  type: addAnswer,
+  type: "ADD_TO_ANSWER",
   payload: answerValue,
 });
 
