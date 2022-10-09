@@ -9,9 +9,15 @@ const setCurrentUser = (currentUser: string): ActionType => ({
   payload: currentUser,
 });
 
-const selectNumber = (selectedNumber: number): ActionType => ({
+const selectNumber = (
+  selectedNumber: number,
+  tableUpto: number
+): ActionType => ({
   type: numberSelect,
-  payload: selectedNumber,
+  payload: {
+    selectedNumber,
+    tableUpto,
+  },
 });
 const updateAnswer = (answerValue: number): ActionType => ({
   type: addAnswer,

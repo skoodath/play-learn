@@ -2,12 +2,19 @@ type correctAnswer = number;
 
 export type typeName = "SET_USER" | "SELECT_NUMBER" | "ADD_TO_ANSWER";
 
-export type ActionType = { type: typeName; payload: string | number };
+export type multiple = {
+  selectedNumber: number;
+  tableUpto: number;
+};
+
+export type ActionType = {
+  type: typeName;
+  payload: number | string | multiple;
+};
 
 export interface AppState {
   currentUser: string;
-  selectedNumber: number;
-  tableUpto: number;
+  table: multiple;
   correctAnswer: correctAnswer[];
   selectedAnswers: Set<number>;
 }

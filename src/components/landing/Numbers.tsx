@@ -1,19 +1,25 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { selectNumber } from "../../state/actions";
 import { AppContext } from "../../state/context";
 import styles from "../styles/header.module.scss";
 
-/* interface NumberProps {
-  isPadOpen: boolean;
-  setIsPadOpen: React.Dispatch<React.SetStateAction<boolean>>;
-} */
-const Numbers = () => {
+interface NumberProps {
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const Numbers = ({ setModal }: NumberProps) => {
   const { state, dispatch } = useContext(AppContext);
+
+  const numRef = useRef<HTMLInputElement>(null);
+  const uptoRef = useRef<HTMLInputElement>(null);
 
   const { currentUser } = state;
 
-  const selectValue = (num: number) => {
-    dispatch(selectNumber(num));
+  const selectValue = () => {
+    let num = +numRef.current!.value;
+    let numUpto = +uptoRef.current!.value;
+
+    dispatch(selectNumber(num, numUpto));
+    setModal(false);
   };
   return (
     <section className={styles.num_wrapper}>
@@ -27,19 +33,26 @@ const Numbers = () => {
             the table
           </p>
         </div>
-        <div>
-          <label>
-            Pick a number
-            <input />
+        <div className={styles.input_wrap}>
+          <label className={styles.input_one}>
+            Muliply
+            <input type="text" ref={numRef} />
           </label>
-          <label>
-            table till
-            <input />
+          <label className={styles.input_one}>
+            Upto
+            <input type="text" ref={uptoRef} />
           </label>
         </div>
-        <div>
-          <span className={styles.select_button}>Go for it</span>
-          <span className={styles.num_button}>i change my mind</span>
+        <div className={styles.button_wrapper}>
+          <button className={styles.select_button} onClick={selectValue}>
+            Go
+            <br />
+            for it
+          </button>
+          <button className={styles.num_button}>
+            Maybe <br />
+            Later
+          </button>
         </div>
       </section>
     </section>

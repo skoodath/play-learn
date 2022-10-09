@@ -1,13 +1,12 @@
 import Header from "./components/landing/Landing";
 import Interactions from "./components/interactions/Interactions";
-import Selections from "./components/selections/Selections";
+import Selections from "./components/interactions/Selections";
 
 const App = () => {
   return (
     <>
       <Header />
       <main>
-        <Selections />
         <Interactions />
       </main>
     </>

@@ -5,9 +5,10 @@ import styles from "../styles/header.module.scss";
 
 interface WelcomeProps {
   setWelcome: React.Dispatch<React.SetStateAction<boolean>>;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Welcome = ({ setWelcome }: WelcomeProps) => {
+const Welcome = ({ setWelcome, setModal }: WelcomeProps) => {
   const { dispatch } = useContext(AppContext);
 
   const nameRef = useRef<HTMLInputElement>(null);
@@ -20,6 +21,7 @@ const Welcome = ({ setWelcome }: WelcomeProps) => {
       dispatch(setCurrentUser(userName));
     }
     setWelcome(false);
+    setModal(true);
   };
 
   return (

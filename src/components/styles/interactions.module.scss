@@ -1,13 +1,19 @@
+@use "interactions/selections";
+@import "mixins/flex";
+
+.container {
+  @include flex(column, center, center);
+  background-color: #84e6ff;
+  min-height: 100vh;
+}
 .grid_container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.3rem;
   margin: 0 auto;
-  max-width: 1300px;
   justify-content: center;
   align-items: center;
   padding: 3rem 10%;
-  background-color: #84e6ff;
 }
 .grid_item {
   display: flex;

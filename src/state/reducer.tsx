@@ -6,13 +6,16 @@ const [setUser, numberSelect, addAnswer] = typeNames;
 
 export const initialState: AppState = {
   currentUser: "",
-  selectedNumber: 0,
-  tableUpto: 0,
+  table: {
+    selectedNumber: 0,
+    tableUpto: 0,
+  },
   correctAnswer: [],
   selectedAnswers: new Set(),
 };
 
 export const reducer = (state: AppState = initialState, action: ActionType) => {
+  console.log(action.payload);
   switch (action.type) {
     case setUser:
       return {
@@ -22,7 +25,7 @@ export const reducer = (state: AppState = initialState, action: ActionType) => {
     case numberSelect:
       return {
         ...state,
-        selectedNumber: action.payload,
+        table: action.payload,
         correctAnswer: generateGrid(12).map((time) => time * +action.payload),
       };
     case addAnswer:

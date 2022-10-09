@@ -4,10 +4,11 @@ import { generateGrid } from "../../utils/generateArray";
 import { AppContext } from "../../state/context";
 import { updateAnswer } from "../../state/actions";
 import PromptResult from "./PromptResult";
+import Selections from "./Selections";
 
 const Interactions = () => {
   const { state, dispatch } = useContext(AppContext);
-  const { selectedAnswers, correctAnswer } = state;
+  const { table, selectedAnswers, correctAnswer } = state;
   const [showPrompt, setShowPrompt] = useState(false);
 
   const handler = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -31,15 +32,23 @@ const Interactions = () => {
 
   return (
     <>
-      <section className={styles.grid_container} onClick={handler}>
-        {state.selectedNumber > 0 &&
-          generateGrid(150).map((cell, i) => {
-            return (
-              <div key={cell} className={styleAnswers(cell)} data-value={cell}>
-                {cell}
-              </div>
-            );
-          })}
+      <section className={styles.container} onClick={handler}>
+        {table.selectedNumber > 0 && <Selections />}
+        {table.selectedNumber > 0 && (
+          <div className={styles.grid_container}>
+            {generateGrid(table.tableUpto * 12).map((cell, i) => {
+              return (
+                <div
+                  key={cell}
+                  className={styleAnswers(cell)}
+                  data-value={cell}
+                >
+                  {cell}
+                </div>
+              );
+            })}
+          </div>
+        )}
       </section>
       {showPrompt && <PromptResult setShowPrompt={setShowPrompt} />}
     </>
