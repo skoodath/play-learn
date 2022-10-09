@@ -1,4 +1,4 @@
-import Header from "./components/header/Header";
+import Header from "./components/landing/Landing";
 import Interactions from "./components/interactions/Interactions";
 import Selections from "./components/selections/Selections";
 

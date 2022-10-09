@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import styles from "../styles/interactions.module.scss";
 import { generateGrid } from "../../utils/generateArray";
 import { AppContext } from "../../state/context";
-import { addToAnswer } from "../../state/actions";
+import { updateAnswer } from "../../state/actions";
 import PromptResult from "./PromptResult";
 
 const Interactions = () => {
@@ -15,7 +15,7 @@ const Interactions = () => {
     let val: number | string | undefined = target.dataset.value;
 
     if (val && selectedAnswers.size < 12 && isNaN(+val) === false) {
-      dispatch(addToAnswer(+val));
+      dispatch(updateAnswer(+val));
     } else {
       setShowPrompt(true);
     }

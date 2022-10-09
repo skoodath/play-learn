@@ -1,10 +1,21 @@
-import { ActionType } from "../declarations/declarations";
+import { typeName, ActionType } from "../declarations/declarations";
 
-export const selectNumber = (selectedNumber: number): ActionType => ({
-  type: "SELECT_NUMBER",
+const typeNames: typeName[] = ["SET_USER", "SELECT_NUMBER", "ADD_TO_ANSWER"];
+
+const [setUser, numberSelect, addAnswer] = typeNames;
+
+const setCurrentUser = (currentUser: string): ActionType => ({
+  type: setUser,
+  payload: currentUser,
+});
+
+const selectNumber = (selectedNumber: number): ActionType => ({
+  type: numberSelect,
   payload: selectedNumber,
 });
-export const addToAnswer = (answerValue: number): ActionType => ({
-  type: "ADD_TO_ANSWER",
+const updateAnswer = (answerValue: number): ActionType => ({
+  type: addAnswer,
   payload: answerValue,
 });
+
+export { typeNames, setCurrentUser, selectNumber, updateAnswer };
