@@ -16,7 +16,7 @@ const Welcome = ({ setWelcome, setModal }: WelcomeProps) => {
   const addName = () => {
     let userName: string = nameRef.current!.value;
     if (!userName) {
-      dispatch(setCurrentUser("Guest"));
+      dispatch(setCurrentUser("Buddy"));
     } else {
       dispatch(setCurrentUser(userName));
     }
@@ -27,8 +27,8 @@ const Welcome = ({ setWelcome, setModal }: WelcomeProps) => {
   return (
     <section className={styles.welcome}>
       <div className={styles.welcome_message}>
-        <p className={styles.knock_one}>Knock! Knock!</p>
-        <p className={styles.knock_two}>Whose There!</p>
+        <p className={styles.knock_one}>knock! knock!</p>
+        <p className={styles.knock_two}>Shall we do some math?</p>
       </div>
       <div className={styles.input_wrapper}>
         <input

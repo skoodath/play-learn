@@ -17,9 +17,6 @@ const Interactions = () => {
   const { table, selectedAnswers, correctAnswer } = state;
   const [showPrompt, setShowPrompt] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(1);
-  const [lastIndex, setLastIndex] = useState(false);
-
-  console.log(correctAnswer);
 
   const styleAnswers = (val: number) => {
     if (selectedAnswers.has(val)) {
@@ -39,7 +36,6 @@ const Interactions = () => {
     }
   };
 
-  console.log(selectedAnswers.size, table.tableUpto);
   const handler = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as HTMLDivElement;
     let val: number | string | undefined = target.dataset.value;
@@ -51,25 +47,31 @@ const Interactions = () => {
     ) {
       dispatch(updateAnswer(+val));
       setCurrentIndex((prevIndex) => prevIndex + 1);
+      let sound = new Audio("../../src/assets/gamesound.wav");
+      sound.play();
     } else {
       setShowPrompt(true);
+      /* let success = new Audio("../../src/assets/successsound.mp3");
+      success.play(); */
     }
   };
 
   return (
     <>
       <section className={styles.container} onClick={handler}>
-        <button
-          onClick={() => window.location.reload()}
-          style={{
-            padding: "1rem",
-            backgroundColor: "green",
-            color: "#fff",
-            cursor: "pointer",
-          }}
-        >
-          Refresh Page
-        </button>
+        {selectedAnswers.size > 0 && (
+          <button
+            onClick={() => window.location.reload()}
+            style={{
+              padding: "1rem",
+              backgroundColor: "green",
+              color: "#fff",
+              cursor: "pointer",
+            }}
+          >
+            Refresh Page
+          </button>
+        )}
         {table.selectedNumber > 0 && <Selections currentIndex={currentIndex} />}
         {table.selectedNumber > 0 && (
           <div className={styles.grid_container}>
@@ -83,7 +85,10 @@ const Interactions = () => {
                       : styleAnswers(cell)
                   }
                   data-value={cell}
-                  disabled={selectedAnswers.size === table.tableUpto}
+                  disabled={
+                    selectedAnswers.has(cell) ||
+                    selectedAnswers.size >= table.tableUpto
+                  }
                 >
                   {cell}
                 </button>

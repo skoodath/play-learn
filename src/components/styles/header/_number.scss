@@ -20,7 +20,7 @@
 }
 .greeting {
   @include flex(column, center, center);
-  margin: 0 0 2rem 0;
+  margin: 0 0 3rem 0;
   @media (min-width: 768px) {
     width: 70%;
   }
@@ -31,6 +31,7 @@
   margin: 0 0 1rem 0;
   span {
     text-transform: uppercase;
+    color: #12be8b;
   }
 }
 .user_message {
@@ -40,9 +41,9 @@
   font-weight: 500;
 }
 .input_wrap {
-  @include flex(row, space-around, flex-start);
-  margin: 0 0 1rem;
-  gap: 10px;
+  @include flex(row, space-around, center);
+  margin: 0 0 2rem;
+  gap: 5px;
   width: 100%;
   @media (min-width: 768px) {
     width: 50%;
@@ -55,13 +56,24 @@
     width: 80px;
     border: none;
     background-color: #3bffc4;
-    margin: 0.2rem 0 1rem;
     border-radius: 10px;
     text-align: center;
     font-size: 1.3rem;
     font-weight: 900;
     &:focus {
       background-color: #1feeb0;
+    }
+    &::-webkit-outer-spin-button {
+      appearance: none;
+      margin: 0;
+    }
+    &::-webkit-inner-spin-button {
+      appearance: none;
+      margin: 0;
+    }
+    [type="number"] {
+      appearance: textfield;
+      -moz-appearance: textfield;
     }
   }
 }

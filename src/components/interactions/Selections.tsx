@@ -14,12 +14,9 @@ const Selections = ({ currentIndex }: SelectProps) => {
   return (
     <section className={styles.select_container}>
       <div className={styles.display_container}>
-        <span className={styles.number_btn}>{table.selectedNumber}</span>
-        <span>taken </span>
-        <span className={styles.number_btn}>
-          {currentIndex <= table.tableUpto ? currentIndex : ""}
-        </span>
-        <span>{currentIndex === 1 ? "time" : "times"}</span>
+        <span>Multiply {table.selectedNumber}</span>
+        <span>from</span>
+        <span> 1 to {table.tableUpto}</span>
       </div>
     </section>
   );

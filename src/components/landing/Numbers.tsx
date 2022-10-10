@@ -19,7 +19,9 @@ const Numbers = ({ setModal, setWelcome }: NumberProps) => {
     let num = +numRef.current!.value;
     let numUpto = +uptoRef.current!.value;
 
-    dispatch(selectNumber(num, numUpto));
+    if (num < 50 && numUpto < 50) {
+      dispatch(selectNumber(num, numUpto));
+    }
     setModal(false);
   };
   return (
@@ -30,18 +32,17 @@ const Numbers = ({ setModal, setWelcome }: NumberProps) => {
             Hello <span>{currentUser}!</span>
           </span>
           <p className={styles.user_message}>
-            You can pick a number and choose upto what number you want to try
-            the table
+            Pick a number and choose upto what number you want to do the table
           </p>
         </div>
         <div className={styles.input_wrap}>
+          <span>Multiply</span>
           <label className={styles.input_one}>
-            Muliply
-            <input type="text" ref={numRef} />
+            <input type="number" ref={numRef} min={0} max={50} />
           </label>
+          <span>till</span>
           <label className={styles.input_one}>
-            Upto
-            <input type="text" ref={uptoRef} />
+            <input type="number" ref={uptoRef} min={0} max={50} />
           </label>
         </div>
         <div className={styles.button_wrapper}>
