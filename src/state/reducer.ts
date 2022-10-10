@@ -1,8 +1,5 @@
 import { ActionType, AppState } from "../declarations/declarations";
 import { generateGrid } from "../utils/generateArray";
-import { typeNames } from "./actions";
-
-const [setUser, numberSelect, addAnswer] = typeNames;
 
 export const initialState: AppState = {
   currentUser: "",
@@ -15,7 +12,6 @@ export const initialState: AppState = {
 };
 
 export const reducer = (state = initialState, action: ActionType) => {
-  console.log(state);
   switch (action.type) {
     case "SET_USER":
       return {
@@ -26,7 +22,9 @@ export const reducer = (state = initialState, action: ActionType) => {
       return {
         ...state,
         table: action.payload,
-        correctAnswer: generateGrid(12).map((time) => time * +action.payload),
+        correctAnswer: generateGrid(action.payload.tableUpto).map(
+          (time) => time * action.payload.selectedNumber
+        ),
       };
     case "ADD_TO_ANSWER":
       return {

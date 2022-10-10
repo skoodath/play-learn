@@ -3,7 +3,7 @@
 
 .container {
   @include flex(column, center, center);
-  background-color: #84e6ff;
+  background-color: #a3edff;
   min-height: 100vh;
 }
 .grid_container {
@@ -13,7 +13,12 @@
   margin: 0 auto;
   justify-content: center;
   align-items: center;
-  padding: 3rem 10%;
+  padding: 1rem 0;
+  width: 80%;
+  max-width: 65rem;
+  @media (min-width: 48rem) {
+    grid-template-columns: repeat(10, 1fr);
+  }
 }
 .grid_item {
   display: flex;
@@ -21,6 +26,7 @@
   align-items: center;
   max-width: 100px;
   min-height: 70px;
+  border: 1px solid transparent;
   background-image: linear-gradient(
     145deg,
     rgb(214, 214, 214),
@@ -33,6 +39,9 @@
   &:hover {
     scale: 1.05;
     transition: scale 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+  @media (min-width: 48rem) {
+    font-size: 1.5rem;
   }
 }
 .selected {
@@ -83,9 +92,6 @@
 }
 
 @media (min-width: 768px) {
-  .grid_container {
-    grid-template-columns: repeat(15, 1fr);
-  }
   .grid_item {
     font-size: 1.5rem;
   }

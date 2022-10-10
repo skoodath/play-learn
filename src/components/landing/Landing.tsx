@@ -15,9 +15,11 @@ const Landing = () => {
     <header className={styles.app_header}>
       {welcome && <Welcome setWelcome={setWelcome} setModal={setModal} />}
       {modal && <Numbers setModal={setModal} setWelcome={setWelcome} />}
-      {table.selectedNumber <= 0 && !modal && !welcome && (
-        <ZeroMessage setModal={setModal} />
-      )}
+      {!modal &&
+        !welcome &&
+        (table.selectedNumber <= 0 || table.tableUpto <= 0) && (
+          <ZeroMessage setModal={setModal} />
+        )}
     </header>
   );
 };

@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../../state/context";
 import styles from "../styles/header.module.scss";
 
 interface ZeroProps {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const ZeroMessage = ({ setModal }: ZeroProps) => {
+  const { state } = useContext(AppContext);
+  const { table } = state;
+
   return (
     <div className={styles.zero_message}>
       <div className={styles.para}>
         <span>Oh ho!</span>
         <div>
-          <span>Zero</span> <span>X</span> <span>Zero</span> <span>=</span>{" "}
-          <span>Zero</span>
+          <span>{table.selectedNumber}</span> <span>X</span>{" "}
+          <span>{table.tableUpto}</span> <span>=</span> <span>Zero</span>
         </div>
       </div>
       <button
