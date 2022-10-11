@@ -6,8 +6,9 @@ import styles from "../styles/header.module.scss";
 interface NumberProps {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
   setWelcome: React.Dispatch<React.SetStateAction<boolean>>;
+  modal: boolean;
 }
-const Numbers = ({ setModal, setWelcome }: NumberProps) => {
+const Numbers = ({ setModal, modal, setWelcome }: NumberProps) => {
   const { state, dispatch } = useContext(AppContext);
 
   const numRef = useRef<HTMLInputElement>(null);
@@ -22,10 +23,14 @@ const Numbers = ({ setModal, setWelcome }: NumberProps) => {
     if (num < 50 && numUpto < 50) {
       dispatch(selectNumber(num, numUpto));
     }
-    setModal(false);
+    setModal(!modal);
   };
   return (
-    <section className={styles.num_wrapper}>
+    <section
+      className={`${styles.num_wrapper} ${
+        modal ? styles.num_visible : styles.num_hidden
+      } `}
+    >
       <section className={`${styles.num_card}`}>
         <div className={styles.greeting}>
           <span className={styles.user}>
@@ -54,7 +59,7 @@ const Numbers = ({ setModal, setWelcome }: NumberProps) => {
           <button
             className={styles.num_button}
             onClick={() => {
-              setModal(false);
+              setModal(!modal);
               setWelcome(true);
             }}
           >

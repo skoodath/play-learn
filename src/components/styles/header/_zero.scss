@@ -1,7 +1,7 @@
 @import "../mixins/flex";
 
 .zero_message {
-  width: 100%;
+  width: 80%;
   max-width: 50rem;
   min-height: 300px;
   position: absolute;
@@ -12,16 +12,17 @@
   border-radius: 20px;
 }
 .para {
-  font-size: max(4vw, 3rem);
+  font-size: max(4vw, 2rem);
   text-align: center;
   margin: 0 0 2rem 0;
 }
 .goback_button {
   background-color: #ffeb3b;
   border: 1px solid transparent;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
   text-transform: uppercase;
   cursor: pointer;
   border-radius: 20px;
   font-size: 1.2rem;
+  box-shadow: 0 4px 8px rgb(175, 163, 50);
 }

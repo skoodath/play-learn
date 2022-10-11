@@ -5,6 +5,7 @@ import { AppContext } from "../../state/context";
 import { updateAnswer } from "../../state/actions";
 import PromptResult from "./PromptResult";
 import Selections from "./Selections";
+import Results from "./Results";
 
 const styleProps = {
   unSelected: `${styles.grid_item}`,
@@ -59,20 +60,8 @@ const Interactions = () => {
   return (
     <>
       <section className={styles.container} onClick={handler}>
-        {selectedAnswers.size > 0 && (
-          <button
-            onClick={() => window.location.reload()}
-            style={{
-              padding: "1rem",
-              backgroundColor: "green",
-              color: "#fff",
-              cursor: "pointer",
-            }}
-          >
-            Refresh Page
-          </button>
-        )}
-        {table.selectedNumber > 0 && <Selections currentIndex={currentIndex} />}
+        <Results />
+        {table.selectedNumber > 0 && <Selections />}
         {table.selectedNumber > 0 && (
           <div className={styles.grid_container}>
             {generateGrid(table.tableUpto * 15).map((cell, i) => {

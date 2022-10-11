@@ -1,13 +1,30 @@
 @import "../mixins/flex";
+@import "../colors";
 
 .num_wrapper {
-  position: absolute;
+  position: fixed;
   top: 0;
   background-image: linear-gradient(rgb(0 0 0 / 0.7), rgb(0 0 0 / 0.5));
   width: 100vw;
   height: 100vh;
-  @include flex(column, center, center);
+  @include flex(column, flex-start, center);
   padding: 1rem;
+  z-index: 999;
+}
+.num_hidden {
+  opacity: 0;
+  visibility: hidden;
+  .num_card {
+    translate: 0 -20%;
+  }
+}
+.num_visible {
+  opacity: 1;
+  visibility: visible;
+  .num_card {
+    translate: 0;
+    transition: translate 0.5s 0.02s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
 }
 .num_card {
   width: 100%;
@@ -17,6 +34,7 @@
   @include flex(column, center, center);
   border-radius: 10px;
   z-index: 90;
+  margin: 5rem 0 0;
 }
 .greeting {
   @include flex(column, center, center);
@@ -91,7 +109,7 @@
   display: block;
   text-align: center;
   border-radius: 10px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   width: 100%;
   text-transform: uppercase;
@@ -107,11 +125,11 @@
 }
 
 .select_button {
-  background-color: #3bffc4;
+  background-color: $buttonOne;
   color: #0d4735;
   box-shadow: 0 3px 15px rgb(13, 71, 53, 0.5);
   &:hover {
-    background-color: #35daa8;
+    background-color: #92ffde;
   }
 }
 .num_button {
@@ -119,6 +137,6 @@
   color: #f2f3f1;
   box-shadow: 0 3px 15px rgba(210, 98, 70, 0.491);
   &:hover {
-    background-color: #ff977d;
+    background-color: #ff886b;
   }
 }

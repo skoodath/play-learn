@@ -6,9 +6,10 @@ import styles from "../styles/header.module.scss";
 interface WelcomeProps {
   setWelcome: React.Dispatch<React.SetStateAction<boolean>>;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  modal: boolean;
 }
 
-const Welcome = ({ setWelcome, setModal }: WelcomeProps) => {
+const Welcome = ({ setWelcome, modal, setModal }: WelcomeProps) => {
   const { dispatch } = useContext(AppContext);
 
   const nameRef = useRef<HTMLInputElement>(null);
@@ -21,7 +22,7 @@ const Welcome = ({ setWelcome, setModal }: WelcomeProps) => {
       dispatch(setCurrentUser(userName));
     }
     setWelcome(false);
-    setModal(true);
+    setModal(!modal);
   };
 
   return (
@@ -35,7 +36,7 @@ const Welcome = ({ setWelcome, setModal }: WelcomeProps) => {
           type="text"
           ref={nameRef}
           className={styles.input_field}
-          placeholder="What's your name"
+          placeholder="What's your name?"
           maxLength={30}
           required
         />

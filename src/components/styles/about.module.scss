@@ -1,0 +1,74 @@
+@import "mixins/flex";
+
+.about_wrapper {
+  position: fixed;
+  top: 0;
+  background-image: linear-gradient(rgb(0 0 0 / 0.7), rgb(0 0 0 / 0.5));
+  width: 100vw;
+  height: 100vh;
+  @include flex(column, flex-start, center);
+  padding: 1rem;
+  z-index: 999;
+}
+.about_hidden {
+  opacity: 0;
+  visibility: hidden;
+  .about_card {
+    translate: 0 -20%;
+  }
+}
+.about_visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s;
+  .about_card {
+    translate: 0;
+    transition: translate 0.5s 0.02s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+}
+.about_card {
+  width: 100%;
+  max-width: 960px;
+  min-height: 60vh;
+  background-color: #e8fef7;
+  padding: 1rem;
+  @include flex(column, center, center);
+  border-radius: 10px;
+  z-index: 90;
+  margin: 5rem 0 0;
+  position: relative;
+}
+.greeting {
+  @include flex(column, center, center);
+  margin: 0 0 3rem 0;
+  @media (min-width: 768px) {
+    width: 70%;
+  }
+}
+.user {
+  font-size: 2rem;
+  text-align: center;
+  margin: 0 0 1rem 0;
+  span {
+    text-transform: uppercase;
+    color: #12be8b;
+  }
+}
+.user_message {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.close_button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #ff714e;
+  transition: font-size 0.5s;
+  &:hover {
+    font-size: 2.2rem;
+  }
+}
