@@ -36,19 +36,20 @@ const Numbers = ({ setModal, modal, setWelcome }: NumberProps) => {
           <span className={styles.user}>
             Hello <span>{currentUser}!</span>
           </span>
-          <p className={styles.user_message}>
-            Pick a number and choose upto what number you want to do the table
-          </p>
         </div>
         <div className={styles.input_wrap}>
-          <span>Multiply</span>
-          <label className={styles.input_one}>
-            <input type="number" ref={numRef} min={0} max={50} />
-          </label>
-          <span>till</span>
-          <label className={styles.input_one}>
-            <input type="number" ref={uptoRef} min={0} max={50} />
-          </label>
+          <div>
+            <span>Choose a number you want to try</span>
+            <label className={styles.input_one}>
+              <input type="number" ref={numRef} min={0} max={50} />
+            </label>
+          </div>
+          <div>
+            <span>Upto what number do you want to multiply above number?</span>
+            <label className={styles.input_one}>
+              <input type="number" ref={uptoRef} min={0} max={50} />
+            </label>
+          </div>
         </div>
         <div className={styles.button_wrapper}>
           <button className={styles.select_button} onClick={selectValue}>
