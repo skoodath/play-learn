@@ -30,7 +30,7 @@
   position: relative;
   width: 80%;
   max-width: 40rem;
-  height: 50vh;
+  min-height: 50vh;
   background-color: #fff;
   @include flex(column, center, center);
   padding: 2rem 0 1rem;

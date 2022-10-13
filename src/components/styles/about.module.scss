@@ -35,8 +35,11 @@
   @include flex(column, center, center);
   border-radius: 10px;
   z-index: 90;
-  margin: 5rem 0 0;
+  margin: 2rem 0 0;
   position: relative;
+}
+.title {
+  margin: 4rem 0 0;
 }
 .greeting {
   @include flex(column, center, center);
