@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AppContext } from "../../state/context";
+import { AppContext } from "../../state/appContext";
 import styles from "../styles/header.module.scss";
 
 interface ZeroProps {

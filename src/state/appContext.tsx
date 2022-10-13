@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from "react";
 import { ActionType, AppState } from "../declarations/declarations";
-import { initialState, reducer } from "./reducer";
+import { init, initialState, reducer } from "./reducer";
 
 interface ContextProps {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ const AppContext = createContext<{
 }>({ state: initialState, dispatch: () => {} });
 
 const AppContextProvider = ({ children }: ContextProps) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState, init);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

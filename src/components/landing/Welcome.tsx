@@ -1,27 +1,27 @@
 import React, { useContext, useRef } from "react";
-import { setCurrentUser } from "../../state/actions";
-import { AppContext } from "../../state/context";
+import { setCurrentUser, setWelcome } from "../../state/actions";
+import { AppContext } from "../../state/appContext";
 import styles from "../styles/header.module.scss";
 
 interface WelcomeProps {
-  setWelcome: React.Dispatch<React.SetStateAction<boolean>>;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
   modal: boolean;
 }
 
-const Welcome = ({ setWelcome, modal, setModal }: WelcomeProps) => {
+const Welcome = ({ modal, setModal }: WelcomeProps) => {
   const { dispatch } = useContext(AppContext);
 
   const nameRef = useRef<HTMLInputElement>(null);
 
-  const addName = () => {
+  const addName = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     let userName: string = nameRef.current!.value;
     if (!userName) {
       dispatch(setCurrentUser("Buddy"));
     } else {
       dispatch(setCurrentUser(userName));
     }
-    setWelcome(false);
+    dispatch(setWelcome(false));
     setModal(!modal);
   };
 
@@ -31,19 +31,18 @@ const Welcome = ({ setWelcome, modal, setModal }: WelcomeProps) => {
         <p className={styles.knock_one}>knock! knock!</p>
         <p className={styles.knock_two}>Shall we do some math?</p>
       </div>
-      <div className={styles.input_wrapper}>
+      <form className={styles.input_wrapper} onSubmit={addName}>
         <input
           type="text"
           ref={nameRef}
           className={styles.input_field}
           placeholder="What's your name?"
           maxLength={30}
-          required
         />
-        <button onClick={addName} className={styles.input_button}>
+        <button type="submit" className={styles.input_button}>
           Let's Go!
         </button>
-      </div>
+      </form>
     </section>
   );
 };

@@ -2,17 +2,27 @@ import { ActionType, AppState } from "../declarations/declarations";
 import { generateGrid } from "../utils/generateArray";
 
 export const initialState: AppState = {
+  welcome: true,
   currentUser: "",
   table: {
     selectedNumber: 0,
     tableUpto: 0,
   },
   correctAnswer: [],
-  selectedAnswers: new Set(),
+  selectedAnswers: [],
+};
+
+export const init = (initialState: AppState) => {
+  return initialState;
 };
 
 export const reducer = (state = initialState, action: ActionType) => {
   switch (action.type) {
+    case "SET_WELCOME":
+      return {
+        ...state,
+        welcome: action.payload,
+      };
     case "SET_USER":
       return {
         ...state,
@@ -29,8 +39,11 @@ export const reducer = (state = initialState, action: ActionType) => {
     case "ADD_TO_ANSWER":
       return {
         ...state,
-        selectedAnswers: state.selectedAnswers.add(+action.payload),
+        selectedAnswers: [...state.selectedAnswers, +action.payload],
       };
+    case "RESET_ALL":
+      return init(action.payload);
+
     default:
       return state;
   }

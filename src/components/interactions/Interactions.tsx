@@ -1,11 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "../styles/interactions.module.scss";
 import { generateGrid } from "../../utils/generateArray";
-import { AppContext } from "../../state/context";
+import { AppContext } from "../../state/appContext";
 import { updateAnswer } from "../../state/actions";
-import PromptResult from "./PromptResult";
 import Selections from "./Selections";
-import Results from "./Results";
+import Table from "./Table";
+import {
+  InteractionContext,
+  InterContextProvider,
+} from "./context/InteractionContext";
 
 const styleProps = {
   unSelected: `${styles.grid_item}`,
@@ -13,14 +16,16 @@ const styleProps = {
   finished: `${styles.grid_item} ${styles.right}`,
 };
 
+let sound = new Audio("/assets/gamesound.wav");
+
 const Interactions = () => {
+  //const [openTable, setOpenTable] = useState(false);
   const { state, dispatch } = useContext(AppContext);
   const { table, selectedAnswers, correctAnswer } = state;
-  const [showPrompt, setShowPrompt] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(1);
 
   const styleAnswers = (val: number) => {
-    if (selectedAnswers.has(val)) {
+    if (selectedAnswers.includes(val)) {
       return styleProps.selected;
     } else {
       return styleProps.unSelected;
@@ -30,7 +35,7 @@ const Interactions = () => {
   const styleAnswerDone = (val: number) => {
     if (correctAnswer.includes(val)) {
       return styleProps.finished;
-    } else if (selectedAnswers.has(val)) {
+    } else if (selectedAnswers.includes(val)) {
       return styleProps.selected;
     } else {
       return styleProps.unSelected;
@@ -43,41 +48,44 @@ const Interactions = () => {
 
     if (
       val &&
-      selectedAnswers.size < table.tableUpto &&
+      selectedAnswers.length < table.tableUpto &&
       isNaN(+val) === false
     ) {
+      sound.play();
       dispatch(updateAnswer(+val));
       setCurrentIndex((prevIndex) => prevIndex + 1);
-      let sound = new Audio("../../src/assets/gamesound.wav");
-      sound.play();
-    } else {
-      setShowPrompt(true);
-      /* let success = new Audio("../../src/assets/successsound.mp3");
-      success.play(); */
     }
   };
 
+  let buttonState = (currentValue: number) => {
+    return (
+      selectedAnswers.includes(currentValue) ||
+      selectedAnswers.length >= table.tableUpto
+    );
+  };
+
   return (
-    <>
-      <section className={styles.container} onClick={handler}>
-        <Results />
-        {table.selectedNumber > 0 && <Selections />}
+    <section className={styles.container}>
+      <InterContextProvider>
         {table.selectedNumber > 0 && (
-          <div className={styles.grid_container}>
+          <Selections
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+          />
+        )}
+        {table.selectedNumber > 0 && (
+          <div className={styles.grid_container} onClick={handler}>
             {generateGrid(table.tableUpto * 15).map((cell, i) => {
               return (
                 <button
                   key={cell}
                   className={
-                    selectedAnswers.size === table.tableUpto
+                    selectedAnswers.length === table.tableUpto
                       ? styleAnswerDone(cell)
                       : styleAnswers(cell)
                   }
                   data-value={cell}
-                  disabled={
-                    selectedAnswers.has(cell) ||
-                    selectedAnswers.size >= table.tableUpto
-                  }
+                  disabled={buttonState(cell)}
                 >
                   {cell}
                 </button>
@@ -85,9 +93,9 @@ const Interactions = () => {
             })}
           </div>
         )}
-      </section>
-      {/* {showPrompt && <PromptResult setShowPrompt={setShowPrompt} />} */}
-    </>
+        <Table />
+      </InterContextProvider>
+    </section>
   );
 };
 

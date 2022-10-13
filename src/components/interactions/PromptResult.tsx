@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { AppContext } from "../../state/context";
+import { AppContext } from "../../state/appContext";
 import { compareResults } from "../../utils/compareResults";
 import styles from "../styles/interactions.module.scss";
 

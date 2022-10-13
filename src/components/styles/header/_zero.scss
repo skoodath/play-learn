@@ -25,4 +25,10 @@
   border-radius: 20px;
   font-size: 1.2rem;
   box-shadow: 0 4px 8px rgb(175, 163, 50);
+  &:hover {
+    background-image: linear-gradient(
+      rgb(255 255 255 / 0.3),
+      rgb(255 255 255 / 0.2)
+    );
+  }
 }

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AppContext } from "../../state/context";
+import CloseButton from "../../common/buttons/CloseButton";
 import styles from "../styles/about.module.scss";
 
 interface AboutProps {
@@ -15,17 +15,14 @@ const LearnMore = ({ setOpenMenu, openMenu }: AboutProps) => {
       } `}
     >
       <section className={styles.about_card}>
-        <span
-          className={styles.close_button}
-          onClick={() => setOpenMenu(!openMenu)}
-        >
-          &times;
-        </span>
+        <CloseButton setOpenModal={setOpenMenu} openModal={openMenu} />
+        <h2 className={styles.title}>Multiplication Table</h2>
         <div className={styles.greeting}>
-          <span className={styles.user}>Hello</span>
           <p className={styles.user_message}>
-            This is a simple game to teach children multiplication through skip
-            counting
+            A skip counting game to learn multiplication table! <br />
+            <br />
+            For example, pick 5 to do table for 5 and then pick 10 to do 5's
+            table from 1 to 10.
           </p>
         </div>
       </section>

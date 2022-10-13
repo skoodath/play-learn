@@ -1,14 +1,17 @@
 @import "../mixins/flex";
+@import "../colors";
 
 .select_container {
-  padding: 1rem;
+  padding: 1rem 0;
   margin: 5rem 0 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   position: relative;
   width: 80%;
   max-width: 40rem;
+  min-height: 25vh;
   border-radius: 10px;
 }
 .display_container {
@@ -32,4 +35,42 @@
   border-radius: 15px;
   font-size: 1.1rem;
   box-shadow: 0 4px 10px rgb(0 0 0 / 0.2), 0 0 0 4px rgb(236, 236, 236) inset;
+}
+
+.button_wrapper {
+  width: 100%;
+  @include flex(row, center, center);
+  gap: 10px;
+}
+.show_table_btn,
+.restart_btn {
+  padding: 0.7rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 0.2);
+  cursor: pointer;
+  &:hover {
+    background-image: linear-gradient(
+      rgb(255 255 255 / 0.3),
+      rgb(255 255 255 / 0.2)
+    );
+  }
+}
+.show_table_btn {
+  background-color: $buttonOne;
+  flex: 2;
+}
+.restart_btn {
+  background-color: $buttonTwo;
+  flex: 1;
+}
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 1.2rem 2rem;
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgb(0 0 0 / 0.2);
 }

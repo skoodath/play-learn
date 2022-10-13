@@ -1,6 +1,9 @@
-import { typeName, ActionType } from "../declarations/declarations";
+import { ActionType, AppState } from "../declarations/declarations";
 
-const typeNames: typeName[] = ["SET_USER", "SELECT_NUMBER", "ADD_TO_ANSWER"];
+const setWelcome = (value: boolean): ActionType => ({
+  type: "SET_WELCOME",
+  payload: value,
+});
 
 const setCurrentUser = (currentUser: string): ActionType => ({
   type: "SET_USER",
@@ -22,4 +25,9 @@ const updateAnswer = (answerValue: number): ActionType => ({
   payload: answerValue,
 });
 
-export { typeNames, setCurrentUser, selectNumber, updateAnswer };
+const resetAll = (state: AppState): ActionType => ({
+  type: "RESET_ALL",
+  payload: state,
+});
+
+export { setWelcome, setCurrentUser, selectNumber, updateAnswer, resetAll };

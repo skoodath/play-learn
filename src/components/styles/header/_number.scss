@@ -58,20 +58,23 @@
   font-size: 1.4rem;
   font-weight: 500;
 }
+
 .input_wrap {
+  @include flex(row, space-between, center);
+  width: 90%;
+  gap: 10px;
+}
+
+.form {
   @include flex(column, space-around, center);
   margin: 0 0 4rem;
   gap: 35px;
   width: 100%;
-  div {
-    @include flex(row, space-between, center);
-    width: 90%;
-    gap: 10px;
-  }
   @media (min-width: 768px) {
     width: 70%;
   }
 }
+
 .input_one {
   @include flex(column, center, center);
   input {
@@ -103,9 +106,6 @@
 .button_wrapper {
   @include flex(row, center, center);
   width: 100%;
-  @media (min-width: 768px) {
-    width: 70%;
-  }
 }
 .select_button,
 .num_button {
@@ -134,7 +134,10 @@
   color: #0d4735;
   box-shadow: 0 3px 15px rgb(13, 71, 53, 0.5);
   &:hover {
-    background-color: #92ffde;
+    background-image: linear-gradient(
+      rgb(255 255 255 / 0.3),
+      rgb(255 255 255 / 0.2)
+    );
   }
 }
 .num_button {
@@ -142,6 +145,9 @@
   color: #f2f3f1;
   box-shadow: 0 3px 15px rgba(210, 98, 70, 0.491);
   &:hover {
-    background-color: #ff886b;
+    background-image: linear-gradient(
+      rgb(255 255 255 / 0.3),
+      rgb(255 255 255 / 0.2)
+    );
   }
 }
