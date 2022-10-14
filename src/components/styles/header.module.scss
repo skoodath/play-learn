@@ -4,7 +4,5 @@
 @import "mixins/flex";
 
 .app_header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include flex(row, space-between, center);
 }

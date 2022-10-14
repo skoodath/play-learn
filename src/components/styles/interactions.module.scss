@@ -1,10 +1,11 @@
 @use "interactions/selections";
 @use "interactions/table";
 @import "mixins/flex";
+@import "../styles/colors";
 
 .container {
   @include flex(column, center, center);
-  background-color: #a3edff;
+  background-color: $BgTwo;
   min-height: 100vh;
 }
 .grid_container {
@@ -45,18 +46,18 @@
 .selected {
   background-image: linear-gradient(
     145deg,
-    rgb(202, 176, 32),
-    rgb(255, 232, 118)
+    hsl(56, 75%, 70%),
+    hsl(56, 75%, 90%)
   );
-  box-shadow: 0 4px 10px rgb(0 0 0 / 0.2), 0 0 0 6px rgb(255, 236, 143) inset;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.2), 0 0 0 6px hsl(56, 80%, 54%) inset;
 }
 .right {
   background-image: linear-gradient(
     145deg,
-    rgb(32, 202, 91),
-    rgb(160, 255, 193)
+    rgb(121, 238, 213),
+    rgba(178, 234, 222, 0.734)
   );
-  box-shadow: 0 4px 10px rgb(0 0 0 / 0.2), 0 0 0 6px rgb(190, 255, 213) inset;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.2), 0 0 0 6px rgb(97, 240, 209) inset;
 }
 
 @media (min-width: 768px) {

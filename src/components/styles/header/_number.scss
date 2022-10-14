@@ -29,7 +29,7 @@
 .num_card {
   width: 100%;
   max-width: 960px;
-  background-color: #e8fef7;
+  background-color: $BgOneLite;
   padding: 3rem 0;
   @include flex(column, center, center);
   border-radius: 10px;
@@ -49,7 +49,7 @@
   margin: 0 0 1rem 0;
   span {
     text-transform: uppercase;
-    color: #12be8b;
+    color: #79ccee;
   }
 }
 .user_message {
@@ -81,13 +81,15 @@
     padding: 0.8rem 0.2rem;
     width: 70px;
     border: none;
-    background-color: hsl(162, 100%, 77%);
+    background-color: $BgTwo;
     border-radius: 10px;
     text-align: center;
     font-size: 1.3rem;
     font-weight: 900;
+    outline: 1px solid transparent;
+    color: $inputColor;
     &:focus {
-      background-color: #1feeb0;
+      background-color: $BgThree;
     }
     &::-webkit-outer-spin-button {
       appearance: none;
@@ -105,11 +107,11 @@
 }
 .button_wrapper {
   @include flex(row, center, center);
-  width: 100%;
+  width: 90%;
+  gap: 10px;
 }
 .select_button,
 .num_button {
-  margin: 0.5rem;
   padding: 0.5rem;
   display: block;
   text-align: center;
@@ -131,8 +133,8 @@
 
 .select_button {
   background-color: $buttonOne;
-  color: #0d4735;
-  box-shadow: 0 3px 15px rgb(13, 71, 53, 0.5);
+  color: $secondaryColor;
+  box-shadow: 0 3px 15px rgba(254, 159, 161, 0.7);
   &:hover {
     background-image: linear-gradient(
       rgb(255 255 255 / 0.3),
@@ -141,9 +143,9 @@
   }
 }
 .num_button {
-  background-color: #d26246;
-  color: #f2f3f1;
-  box-shadow: 0 3px 15px rgba(210, 98, 70, 0.491);
+  background-color: $buttonTwo;
+  color: $secondaryColor;
+  box-shadow: 0 3px 10px rgba(254, 159, 161, 0.7);
   &:hover {
     background-image: linear-gradient(
       rgb(255 255 255 / 0.3),

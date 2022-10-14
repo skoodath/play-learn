@@ -1,3 +1,4 @@
+@import "../../components/styles/colors";
 .navbar {
   position: fixed;
   top: 0;
@@ -37,7 +38,7 @@
 .navitem_two {
   width: 20px;
   height: 80%;
-  background-color: #ff714e;
+  background-color: $buttonOne;
   z-index: 1001;
   top: 50%;
   left: 0%;

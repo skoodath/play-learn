@@ -1,4 +1,5 @@
 @import "mixins/flex";
+@import "../styles/colors";
 
 .about_wrapper {
   position: fixed;
@@ -30,7 +31,7 @@
   width: 100%;
   max-width: 960px;
   min-height: 60vh;
-  background-color: #e8fef7;
+  background-color: $BgOneLite;
   padding: 1rem;
   @include flex(column, center, center);
   border-radius: 10px;
@@ -62,7 +63,7 @@
     left: 0;
     width: 40%;
     height: 3px;
-    background-color: #ff714e;
+    background-color: $buttonOne;
   }
   &:after {
     position: absolute;
@@ -71,7 +72,7 @@
     right: 0;
     width: 40%;
     height: 3px;
-    background-color: #ff714e;
+    background-color: $buttonOne;
   }
 }
 .close_button {

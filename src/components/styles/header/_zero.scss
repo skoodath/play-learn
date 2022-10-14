@@ -1,4 +1,5 @@
 @import "../mixins/flex";
+@import "../colors";
 
 .zero_message {
   width: 80%;
@@ -17,14 +18,15 @@
   margin: 0 0 2rem 0;
 }
 .goback_button {
-  background-color: #ffeb3b;
+  background-color: $buttonOne;
   border: 1px solid transparent;
   padding: 1rem 1rem;
   text-transform: uppercase;
   cursor: pointer;
   border-radius: 20px;
   font-size: 1.2rem;
-  box-shadow: 0 4px 8px rgb(175, 163, 50);
+  box-shadow: 0 2px 5px #ff5e61;
+  transition: background-image 0.5s ease-in;
   &:hover {
     background-image: linear-gradient(
       rgb(255 255 255 / 0.3),
