@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { selectNumber, setWelcome } from "../../state/actions";
 import { AppContext } from "../../state/appContext";
 import styles from "../styles/header.module.scss";
@@ -14,6 +14,10 @@ const Numbers = ({ setModal, modal }: NumberProps) => {
   const uptoRef = useRef<HTMLInputElement>(null);
 
   const { currentUser } = state;
+
+  useEffect(() => {
+    numRef.current!.focus();
+  });
 
   const selectValue = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

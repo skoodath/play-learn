@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { setCurrentUser, setWelcome } from "../../state/actions";
 import { AppContext } from "../../state/appContext";
 import styles from "../styles/header.module.scss";
@@ -12,6 +12,9 @@ const Welcome = ({ modal, setModal }: WelcomeProps) => {
   const { dispatch } = useContext(AppContext);
 
   const nameRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    nameRef.current!.focus();
+  });
 
   const addName = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
