@@ -61,7 +61,7 @@
 }
 
 .input_wrap {
-  @include flex(row, space-between, center);
+  @include flex(column, space-between, center);
   width: 90%;
   gap: 10px;
 }
@@ -78,19 +78,22 @@
 
 .input_one {
   @include flex(column, center, center);
-  input {
+  p {
     padding: 0.8rem 0.2rem;
-    width: 70px;
+    width: 50px;
+    height: 50px;
     border: none;
-    background-color: $BgTwo;
-    border-radius: 10px;
+    border-bottom: 3px solid $BgTwo;
+    background-color: transparent;
+    border-radius: 0;
     text-align: center;
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: 900;
     outline: 1px solid transparent;
     color: $inputColor;
     &:focus {
       background-color: $BgThree;
+      border: none;
     }
     &::-webkit-outer-spin-button {
       appearance: none;

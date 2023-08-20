@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../state/appContext";
 import styles from "../styles/header.module.scss";
-import Numbers from "./Numbers";
 import Welcome from "./Welcome";
 import ZeroMessage from "./ZeroMessage";
 
@@ -13,7 +12,6 @@ const Landing = () => {
   return (
     <header className={styles.app_header}>
       {welcome && <Welcome setModal={setModal} modal={modal} />}
-      <Numbers setModal={setModal} modal={modal} />
       {!modal &&
         !welcome &&
         currentUser !== "" &&

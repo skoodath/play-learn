@@ -32,7 +32,7 @@ const Welcome = ({ modal, setModal }: WelcomeProps) => {
     <section className={styles.welcome}>
       <div className={styles.welcome_message}>
         <p className={styles.knock_one}>knock! knock!</p>
-        <p className={styles.knock_two}>Shall we do some math?</p>
+        <p className={styles.knock_two}>Shall we do some multiplications?</p>
       </div>
       <form className={styles.input_wrapper} onSubmit={addName}>
         <input

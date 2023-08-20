@@ -5,11 +5,11 @@
   width: 100vw;
   min-height: 100vh;
   background-image: $BgTwoGradient;
+  background-repeat: no-repeat;
   position: fixed;
   top: 0;
   z-index: 99;
-  padding: 5rem 0 0 0;
-  margin: 3rem 0 0 0;
+  padding: 8rem 0 0 0;
 }
 .welcome_message {
   margin: 2rem 0;
@@ -68,16 +68,16 @@
   }
 }
 .input_button {
+  color: $buttonOne;
   width: 100%;
   max-width: 400px;
   padding: 1rem;
-  background-color: $buttonOne;
+  background-color: transparent;
   text-transform: uppercase;
   font-size: 1.3rem;
   font-weight: bold;
   border: 1px solid transparent;
   border-radius: 20px;
-  box-shadow: 0 3px 10px rgb(13, 71, 53, 0.2);
   cursor: pointer;
   &:hover {
     animation: shake 1s cubic-bezier(0.00915, 0.0061, 0.955, 1) 1;
@@ -87,7 +87,7 @@
 @keyframes shake {
   0% {
     font-size: 1.3rem;
-    color: $primaryColor;
+    color: $buttonTwo;
   }
   100% {
     font-size: 2.3rem;

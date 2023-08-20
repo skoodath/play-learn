@@ -2,14 +2,13 @@ import { ActionType, AppState } from "../declarations/declarations";
 import { generateGrid } from "../utils/generateArray";
 
 export const initialState: AppState = {
-  welcome: true,
+  welcome: false,
   currentUser: "",
   table: {
     selectedNumber: 0,
     tableUpto: 0,
   },
   correctAnswer: [],
-  selectedAnswers: [],
 };
 
 export const init = (initialState: AppState) => {
@@ -35,11 +34,6 @@ export const reducer = (state = initialState, action: ActionType) => {
         correctAnswer: generateGrid(action.payload.tableUpto).map(
           (time) => time * action.payload.selectedNumber
         ),
-      };
-    case "ADD_TO_ANSWER":
-      return {
-        ...state,
-        selectedAnswers: [...state.selectedAnswers, +action.payload],
       };
     case "RESET_ALL":
       return init(action.payload);

@@ -4,30 +4,26 @@
 @import "../styles/colors";
 
 .container {
-  @include flex(column, center, center);
-  background-color: $BgTwo;
+  padding: 3rem 0 0;
+  @include flex(column, flex-start, center);
+  background-image: $BgTwoGradient;
   min-height: 100vh;
 }
 .grid_container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
   gap: 0.3rem;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
   padding: 1rem 0;
   width: 80%;
-  max-width: 65rem;
-  @media (min-width: 48rem) {
-    grid-template-columns: repeat(10, 1fr);
-  }
 }
 .grid_item {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 100px;
-  min-height: 70px;
+  width: 75px;
+  height: 75px;
   border: 1px solid transparent;
   background-image: linear-gradient(
     145deg,
@@ -42,6 +38,60 @@
     scale: 1.05;
     transition: scale 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
   }
+}
+.grid_nav {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  gap: 6px;
+  margin: 8px;
+  border: none;
+  background-color: transparent;
+  text-transform: uppercase;
+  &__disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  svg {
+    font-size: 24px;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  }
+  &[data-name="next"] {
+    &:hover {
+      svg {
+        translate: 5px 0;
+        font-size: 32px;
+      }
+    }
+  }
+  &[data-name="prev"] {
+    &:hover {
+      svg {
+        translate: -5px 0;
+        font-size: 32px;
+      }
+    }
+  }
+}
+.answer_container {
+  @include flex(r, center, center);
+  gap: 12px;
+  font-size: 1.5rem;
+}
+.answer_field {
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid yellow;
+  outline-color: transparent;
+  outline-width: 0;
+  width: fit-content;
+  max-width: 100px;
+  height: 40px;
+  padding: 1.5rem 0.5rem;
+  text-align: center;
 }
 .selected {
   background-image: linear-gradient(

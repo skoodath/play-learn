@@ -33,5 +33,4 @@ export interface AppState {
   currentUser: string;
   table: multiple;
   correctAnswer: number[];
-  selectedAnswers: number[];
 }
