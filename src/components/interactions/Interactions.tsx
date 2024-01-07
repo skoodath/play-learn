@@ -15,6 +15,7 @@ import {
 } from "./context/InteractionContext";
 import SelectNumber from "./SelectNumber";
 import { FaCaretRight, FaCheck } from "react-icons/fa";
+import Guide from "./Guide";
 
 const styleProps = {
   unSelected: `${styles.grid_item}`,
@@ -24,51 +25,65 @@ const styleProps = {
 
 let sound = new Audio("/assets/gamesound.wav");
 
+type AnswerType = {
+  [key: string]: number;
+};
+
 const Interactions = () => {
   //const [openTable, setOpenTable] = useState(false);
   const [numberSelected, setNumberSelected] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState<number>(0);
-  const [answerValue, setAnswerValue] = useState<number>(0);
-  const [tries, setTries] = useState(5);
+  const [answerValue, setAnswerValue] = useState("");
+  const [emojis, setEmojis] = useState<string[]>([]);
   const [isAnswerRight, setIsAnswerRight] = useState(false);
-  const [correctAnswers, setCorrectAnswer] = useState<
-    { [key: string]: number }[]
-  >([]);
-  //const [multiplyBy, setMultiplyBy] = useState<number>(1);
+  const [correctAnswers, setCorrectAnswer] = useState<AnswerType[]>([]);
+  const [multiple, setMultiple] = useState<number>(1);
+  const [clue, setClue] = useState(false);
 
   const handleAnswerValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setIsAnswerRight(false);
-    setAnswerValue(+e.target?.value);
+    setAnswerValue(e.target?.value);
   };
 
   useEffect(() => {
-    const answerKeyJSON = sessionStorage.getItem("answerkey");
-    const answerKeyObject = answerKeyJSON && JSON.parse(answerKeyJSON);
-    let answerObject: { [key: string]: number } = {};
-    for (let key in answerKeyObject) {
-      if (answerKeyObject[key] === answerValue) {
+    if (sessionStorage.getItem("answerkey") === undefined) return undefined;
+    else {
+      const answerKeyJSON = sessionStorage.getItem("answerkey");
+      const answerKeyObject = answerKeyJSON && JSON.parse(answerKeyJSON);
+      const answerValueNumber = +answerValue;
+      if (answerKeyObject && answerKeyObject[multiple] === answerValueNumber) {
         setIsAnswerRight(true);
-        answerObject = { [key]: answerValue };
+      } else {
+        setIsAnswerRight(false);
       }
     }
-    for (let val of correctAnswers) {
-      if (val && _.isEqual(val, answerObject)) {
-        console.log(val, answerObject);
-      }
-      setCorrectAnswer([...correctAnswers, answerObject]);
-    }
-  }, [answerValue]);
+  }, [multiple, answerValue]);
 
-  console.log(correctAnswers);
-
-  let multiple = "1";
   const handleNextEquation = () => {
-    if (correctAnswers.length <= 0) return;
-    setAnswerValue(0);
-    multiple += 1;
+    const answerValueNumber = +answerValue;
+    if (correctAnswers.length <= 0) {
+      setCorrectAnswer([{ [multiple]: answerValueNumber }]);
+    } else {
+      for (let val of correctAnswers) {
+        for (let key in val) {
+          if (key === multiple.toString()) return;
+          else {
+            setCorrectAnswer([
+              ...correctAnswers,
+              { [multiple.toString()]: answerValueNumber },
+            ]);
+          }
+        }
+      }
+    }
+    setEmojis([...emojis, "🍧"]);
+    setAnswerValue("");
+    setMultiple(multiple + 1);
+    setClue(false);
   };
 
-  console.log(correctAnswers);
+  const handleClue = () => {
+    setClue(true);
+  };
 
   return (
     <section className={styles.container}>
@@ -92,27 +107,77 @@ const Interactions = () => {
           </div>
         )}
         {numberSelected && (
-          <div>
-            <div>You are doing multiplication table of {selectedNumber}</div>
-            <div className={styles.answer_container}>
-              <span>{selectedNumber}</span> X <span>{multiple}</span> ={" "}
-              <input
-                type="text"
-                name="answer"
-                maxLength={3}
-                className={styles.answer_field}
-                onChange={(e) => handleAnswerValue(e)}
-                value={answerValue > 0 ? answerValue?.toString() : ""}
-              />
-              {isAnswerRight ? "🙂" : "☹️"}
-              <span onClick={handleNextEquation}>Next</span> <FaCaretRight />
+          <>
+            <div className={styles.information}>
+              You are doing multiplication table of {selectedNumber}
             </div>
-            <div>
-              {correctAnswers.map((correctAnswer) => (
-                <p></p>
-              ))}
+            <div className={styles.action_wrapper}>
+              <div className={styles.answer_container}>
+                <div className={styles.answer_answerarea}>
+                  <span>{selectedNumber}</span> X <span>{multiple}</span> ={" "}
+                  <input
+                    type="text"
+                    name="answer"
+                    maxLength={3}
+                    className={styles.answer_field}
+                    onChange={(e) => handleAnswerValue(e)}
+                    value={+answerValue > 0 ? answerValue?.toString() : ""}
+                  />
+                  {isAnswerRight ? "🙂" : "?"}
+                  <button
+                    disabled={!isAnswerRight}
+                    className={
+                      isAnswerRight
+                        ? styles.equation_next_button
+                        : [
+                            styles.equation_next_button,
+                            styles.button_disabled,
+                          ].join(" ")
+                    }
+                    onClick={handleNextEquation}
+                  >
+                    <span>Next</span> <FaCaretRight />
+                  </button>
+                </div>
+                <div className={styles.answer_answerclue}>
+                  <button
+                    className={styles.answer_helpbutton}
+                    onClick={handleClue}
+                  >
+                    I need help
+                  </button>
+                  {clue && (
+                    <div className={styles.answer_clue_content}>
+                      <span
+                        className={styles.close_clue}
+                        onClick={() => setClue(false)}
+                      >
+                        close x
+                      </span>
+                      <p className={styles.answer_help_text}>
+                        Count the number of 🍧below and that will be the answer
+                      </p>
+                      <Guide
+                        multiple={multiple}
+                        selectedNumber={selectedNumber}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className={styles.answer_display}>
+                {correctAnswers.length > 0 &&
+                  correctAnswers.map((correctAnswer, i) => {
+                    const key = Object.keys(correctAnswer).join("");
+
+                    const displayValue = `${selectedNumber} X ${Object.keys(
+                      correctAnswer
+                    )} = ${Object.values(correctAnswer)} `;
+                    return <p key={key}>{displayValue}</p>;
+                  })}
+              </div>
             </div>
-          </div>
+          </>
         )}
       </InterContextProvider>
     </section>

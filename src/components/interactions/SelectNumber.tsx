@@ -18,8 +18,11 @@ const SelectNumber = ({ setSelectedNumber, setNumberSelected }: Props) => {
     return standardMultiples.reduce((o, k) => ({ ...o, [k]: val * k }), {});
   };
 
-  const handleNumberSelect = (val: number) => {
+  useEffect(() => {
     sessionStorage.removeItem("answerkey");
+  }, []);
+
+  const handleNumberSelect = (val: number) => {
     setSelectedNumber(val);
     setNumberSelected(true);
     const answerKey = getAnswerKey(val);
