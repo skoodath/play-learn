@@ -7,7 +7,7 @@ import { AppContext } from "./state/appContext";
 const App = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const { state } = useContext(AppContext);
-  const { table, selectedAnswers } = state;
+  const { table } = state;
 
   return (
     <>
