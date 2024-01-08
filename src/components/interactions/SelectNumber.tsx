@@ -9,7 +9,18 @@ type Props = {
 const standardMultiples = Array.from(Array(51).keys()).slice(1);
 
 const SelectNumber = ({ setSelectedNumber, setNumberSelected }: Props) => {
-  const [numberList, setNumberList] = useState([1, 2, 3, 4, 5]);
+  const [numberList, setNumberList] = useState<number[]>([1, 2, 3, 4, 5]);
+  const [viewPort, setViewPort] = useState(0);
+
+  useEffect(() => {
+    setViewPort(document.documentElement.clientWidth || window.innerWidth);
+    if (viewPort < 768) {
+      setNumberList([1, 2, 3]);
+    } else {
+      setNumberList([1, 2, 3, 4, 5]);
+    }
+    setNumberList;
+  }, []);
 
   const disablePrevious = numberList[0] === 1;
   const disableNext = numberList[numberList.length - 1] === 50;
@@ -43,17 +54,19 @@ const SelectNumber = ({ setSelectedNumber, setNumberSelected }: Props) => {
         disabled={disablePrevious}
         data-name="prev"
       >
-        <FaCaretLeft /> <span>Previous</span>
+        <FaCaretLeft /> {viewPort > 768 && <span>Previous</span>}
       </button>
-      {numberList.map((number) => (
-        <div
-          key={number}
-          className={styles.grid_item}
-          onClick={() => handleNumberSelect(number)}
-        >
-          {number}
-        </div>
-      ))}
+      <div style={{ display: "flex", gap: "1rem" }}>
+        {numberList.map((number) => (
+          <div
+            key={number}
+            className={styles.grid_item}
+            onClick={() => handleNumberSelect(number)}
+          >
+            {number}
+          </div>
+        ))}
+      </div>
       <button
         className={
           disableNext
@@ -66,7 +79,7 @@ const SelectNumber = ({ setSelectedNumber, setNumberSelected }: Props) => {
         disabled={disableNext}
         data-name="next"
       >
-        <span>Next</span> <FaCaretRight />
+        {viewPort > 768 && <span>Next</span>} <FaCaretRight />
       </button>
     </div>
   );
