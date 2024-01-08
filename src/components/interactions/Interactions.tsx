@@ -1,20 +1,10 @@
-import React, {
-  ChangeEvent,
-  FormEvent,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import styles from "../styles/interactions.module.scss";
-import { AppContext } from "../../state/appContext";
 import _ from "lodash";
 
-import {
-  InteractionContext,
-  InterContextProvider,
-} from "./context/InteractionContext";
+import { InterContextProvider } from "./context/InteractionContext";
 import SelectNumber from "./SelectNumber";
-import { FaCaretRight, FaCheck } from "react-icons/fa";
+import { FaCaretRight } from "react-icons/fa";
 import Guide from "./Guide";
 
 const styleProps = {
@@ -30,7 +20,6 @@ type AnswerType = {
 };
 
 const Interactions = () => {
-  //const [openTable, setOpenTable] = useState(false);
   const [numberSelected, setNumberSelected] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState<number>(0);
   const [answerValue, setAnswerValue] = useState("");
@@ -85,6 +74,11 @@ const Interactions = () => {
     setClue(true);
   };
 
+  const handleRestart = () => {
+    setAnswerValue("");
+    setNumberSelected(false);
+  };
+
   return (
     <section className={styles.container}>
       <InterContextProvider>
@@ -109,7 +103,12 @@ const Interactions = () => {
         {numberSelected && (
           <>
             <div className={styles.information}>
-              You are doing multiplication table of {selectedNumber}
+              <span>
+                You are doing multiplication table of {selectedNumber}
+              </span>
+              <button className={styles.button_restart} onClick={handleRestart}>
+                Start again
+              </button>
             </div>
             <div className={styles.action_wrapper}>
               <div className={styles.answer_container}>
